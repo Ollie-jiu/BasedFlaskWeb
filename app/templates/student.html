@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow"><a
+    class="sidebar-toggler text-gray-500 me-4 me-lg-5 lead" href="#">
+    <!--<i class="fas fa-align-left"></i>-->
+  </a><a class="navbar-brand fw-bold text-uppercase text-base" href="index.html"><span
+      class="d-none d-brand-partial">Degree </span><span class="d-none d-sm-inline">Overview</span><span
+      class="d-none d-sm-inline">--{{function}}</span></a>
+  <ul class="ms-auto d-flex align-items-center list-unstyled mb-0">
+    <li class="nav-item dropdown ms-auto">
+      <a class="nav-link pe-0" id="userInfo" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-circle"
+          viewBox="0 0 16 16">
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+          <path fill-rule="evenodd"
+            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+        </svg>
+      </a>
+      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userInfo">
+        <div class="dropdown-header text-gray-700">
+          <h6 class="text-uppercase font-weight-bold">{{email}}</h6><small>{{Wtype}}</small>
+        </div>
+        <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Settings</a><a class="dropdown-item"
+          href="#">Activity log</a>
+        <div class="dropdown-divider"></div><a class="dropdown-item" href="{{url_for('user.logout')}}">Logout</a>
+      </div>
+    </li>
+  </ul>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <!--each components-->
+  <div class="col" style="position: absolute;top:100px;margin-left:2%">
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card-widget h-100" style="width:250px">
+        <div class="card-widget-body">
+          <div class="dot me-3 bg-red"></div>
+          <div class="text">
+            <h6 class="mb-0">My profile</h6>
+          </div>
+        </div>
+        <div class="icon text-white bg-red">
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card-widget h-100" style="width:250px">
+        <div class="card-widget-body">
+          <div class="dot me-3 bg-yellow"></div>
+          <div class="text">
+            <h6 class="mb-0">Search</h6>
+          </div>
+        </div>
+        <div class="icon text-white bg-yellow">
+          <a class="dropdown-item" href="{{url_for('studentSearch.search',email=email)}}"></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card-widget h-100" style="width:250px">
+        <div class="card-widget-body">
+          <div class="dot me-3 bg-purple"></div>
+          <div class="text">
+            <h6 class="mb-0">Dependencies</h6>
+          </div>
+        </div>
+        <div class="icon text-white bg-purple">
+          <a class="dropdown-item" href="{{url_for('studentShowDependency.showDependency',email=email)}}"></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card-widget h-100" style="width:250px">
+        <div class="card-widget-body">
+          <div class="dot me-3 bg-green"></div>
+          <div class="text">
+            <h6 class="mb-0">My performance</h6>
+          </div>
+        </div>
+        <div class="icon text-white bg-green">
+          <a class="dropdown-item" href="{{url_for('studentPerformance.get_performance',email=email)}}"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--profile-->
+  <div class="card card-profile mb-4" style="width:600px;margin-left:20%;margin-top:2%;">
+    <div class="card-header"
+      style="background-image: url(https://www.uic.edu.cn/__local/9/FF/A1/057EBA063441BF9C0EC48AE52D2_1C371F1B_AD8E1.jpg);">
+    </div>
+    <div class="card-body text-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-person-circle"
+        viewBox="0 0 16 16">
+        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+        <path fill-rule="evenodd"
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+      </svg>
+      <h3 class="mb-3">{{email}}</h3>
+      <p class="mb-4">{{Wtype}} </p>
+      <button class="btn btn-outline-dark btn-sm"><span class="fab fa-twitter"></span> Follow</button>
+    </div>
+  </div>
+  <!--course data-->
+  <div class="card mb-4" style="width:1200px;margin-left:20%;position:absolute;margin-top:38%;">
+    <div class="card-body">
+      <table class="table table-row-dashed table-row-gray-300 gy-7">
+        <div class="card-header">
+          <h1 class="card-heading">MY COURSES</h1>
+        </div>
+        <thead>
+          <tr class="fw-bolder fs-6 text-gray-800">
+            <th>Course Name</th>
+            <th>code</th>
+            <th>academic_year</th>
+            <th>Programme</th>
+            <th>_type</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in course %}
+          <tr>
+            <td>{{ i.name }}</td>
+            <td>{{ i.code }}</td>
+            <td>{{ i.semester }}</td>
+            <td>{{ i.programme }}</td>
+            <td>{{ i._type }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Calendar-->
+<div class="card mb-4" style="
+                    width:500px;
+                    padding-left:10px;
+                    padding-right:10px;
+                    position: absolute;
+                    right:50px;top:100px">
+  <!--<div class="card-header">
+                <h4 class="card-heading">Calendar</h4>
+              </div>-->
+  <div class="card-body">
+  </div>
+  <div id="calendar"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var todayDate = moment().startOf("day");
+    var YM = todayDate.format("YYYY-MM");
+    var YESTERDAY = todayDate.clone().subtract(1, "day").format("YYYY-MM-DD");
+    var TODAY = todayDate.format("YYYY-MM-DD");
+    var TOMORROW = todayDate.clone().add(1, "day").format("YYYY-MM-DD");
+
+    var calendarEl = document.getElementById("calendar");
+
+    var calendarOptions = {
+      header: {
+        left: "prev,next today",
+        center: "title",
+        right: "month,agendaWeek,agendaDay,listWeek",
+      },
+      editable: true,
+      dayMaxEvents: true, // allow "more" link when too many events
+      navLinks: true,
+      themeSystem: "standard",
+      bootstrapGlyphicons: false,
+      initialView: "dayGridMonth",
+      events: [
+      ],
+    };
+    var calendar = new FullCalendar.Calendar(calendarEl, calendarOptions);
+    calendar.render();
+  });
+</script>
+{% endblock %}

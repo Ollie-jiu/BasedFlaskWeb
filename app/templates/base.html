@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>DegreeOverview</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+
+
+  <!-- Google fonts - Popppins for copy-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+  <!-- Full Calendar-->
+  <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/bubbly/1-0/vendor/fullcalendar/main.min.css">
+  <!-- Prism Syntax Highlighting-->
+  <link rel="stylesheet"
+    href="https://d19m59y37dris4.cloudfront.net/bubbly/1-0/vendor/prismjs/plugins/toolbar/prism-toolbar.css">
+  <link rel="stylesheet"
+    href="https://d19m59y37dris4.cloudfront.net/bubbly/1-0/vendor/prismjs/themes/prism-okaidia.css">
+  <!-- The Main Theme stylesheet (Contains also Bootstrap CSS)-->
+  <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/bubbly/1-0/css/style.default.bd85ceb1.css"
+    id="theme-stylesheet">
+  <!-- Custom stylesheet - for your changes-->
+  <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/bubbly/1-0/css/custom.0a822280.css">
+  <!-- Favicon-->
+  <link rel="shortcut icon" href="https://d19m59y37dris4.cloudfront.net/bubbly/1-0/img/favicon.png">
+</head>
+
+<body>
+  <!-- navbar-->
+  <header class="header">
+    {% block header %} {% endblock%}
+  </header>
+  {% block content %}{% endblock %}
+
+  <!-- JavaScript files-->
+
+  <script src="https://d19m59y37dris4.cloudfront.net/bubbly/1-0/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+  <!-- Init Charts on Homepage-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js">   </script>
+  <script src="https://d19m59y37dris4.cloudfront.net/bubbly/1-0/vendor/fullcalendar/main.min.js">   </script>
+  <script src="js/components-calendar.fb584688.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+  <!-- Prism for syntax highlighting-->
+  <script src="https://d19m59y37dris4.cloudfront.net/bubbly/1-0/vendor/prismjs/prism.js"></script>
+  <script
+    src="https://d19m59y37dris4.cloudfront.net/bubbly/1-0/vendor/prismjs/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+  <script
+    src="https://d19m59y37dris4.cloudfront.net/bubbly/1-0/vendor/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script
+    src="https://d19m59y37dris4.cloudfront.net/bubbly/1-0/vendor/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+  <script type="text/javascript">
+    // Optional
+    Prism.plugins.NormalizeWhitespace.setDefaults({
+      'remove-trailing': true,
+      'remove-indent': true,
+      'left-trim': true,
+      'right-trim': true,
+    });
+
+  </script>
+  <script>
+    function injectSvgSprite(path) {
+
+      var ajax = new XMLHttpRequest();
+      ajax.open("GET", path, true);
+      ajax.send();
+      ajax.onload = function (e) {
+        var div = document.createElement("div");
+        div.className = 'd-none';
+        div.innerHTML = ajax.responseText;
+        document.body.insertBefore(div, document.body.childNodes[0]);
+      }
+    }
+    // this is set to BootstrapTemple website as you cannot 
+    // inject local SVG sprite (using only 'icons/orion-svg-sprite.57a86639.svg' path)
+    // while using file:// protocol
+    // pls don't forget to change to your domain :)
+    injectSvgSprite('https://demo.bootstrapious.com/bubbly/1-0/icons/orion-svg-sprite.57a86639.svg');
+
+  </script>
+  <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow"><a
+    class="sidebar-toggler text-gray-500 me-4 me-lg-5 lead" href="#">
+    <!--<i class="fas fa-align-left"></i>-->
+  </a><a class="navbar-brand fw-bold text-uppercase text-base" href=""><span class="d-none d-brand-partial">Degree
+    </span><span class="d-none d-sm-inline">Overview</span><span class="d-none d-sm-inline"> -- {{function}}</span></a>
+  <ul class="ms-auto d-flex align-items-center list-unstyled mb-0">
+    <li class="nav-item dropdown ms-auto">
+      <a class="nav-link pe-0" id="userInfo" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-circle"
+          viewBox="0 0 16 16">
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+          <path fill-rule="evenodd"
+            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+        </svg>
+      </a>
+      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userInfo">
+        <div class="dropdown-header text-gray-700">
+          <h6 class="text-uppercase font-weight-bold">{{email}}</h6><small>{{Wtype}}</small>
+        </div>
+        <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Settings</a><a class="dropdown-item"
+          href="#">Activity log</a>
+        <div class="dropdown-divider"></div><a class="dropdown-item" href="{{url_for('user.logout')}}">Logout</a>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+{% endblock %}
+{% block content %}
+<br>
+<div class="row" style="margin-left:2%;">
+  <div class="col">
+    <div class="col-xl-3 col-md-6 mb-4" style="width:300px;">
+      <div class="card-widget h-100">
+        <div class="card-widget-body">
+          <div class="dot me-3 bg-red"></div>
+          <div class="text">
+            <h6 class="mb-0">Profile</h6>
+          </div>
+        </div>
+        <div class="icon text-white bg-red"><a class="dropdown-item"
+            href="{{url_for('designer.get_designer',email=email)}}"></a></div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4" style="width:300px;">
+      <div class="card-widget h-100">
+        <div class="card-widget-body">
+          <div class="dot me-3 bg-yellow"></div>
+          <div class="text">
+            <h6 class="mb-0">Create a Course</h6>
+          </div>
+        </div>
+        <div class="icon text-white bg-yellow"></div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4" style="width:300px;">
+      <div class="card-widget h-100">
+        <div class="card-widget-body">
+          <div class="dot me-3 bg-orange"></div>
+          <div class="text">
+            <h6 class="mb-0">Modify a course</h6>
+          </div>
+        </div>
+        <div class="icon text-white bg-orange"><a class="dropdown-item"
+            href="{{url_for('modifyCourse.modifyCourse',email=email)}}"></a></div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4" style="width:300px;">
+      <div class="card-widget h-100">
+        <div class="card-widget-body">
+          <div class="dot me-3 bg-green"></div>
+          <div class="text">
+            <h6 class="mb-0">Define a Dependency</h6>
+          </div>
+        </div>
+        <div class="icon text-white bg-green"><a class="dropdown-item"
+            href="{{url_for('defineDependency.defineDependency',email=email)}}"></a></i></div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4" style="width:300px;">
+      <div class="card-widget h-100">
+        <div class="card-widget-body">
+          <div class="dot me-3 bg-purple"></div>
+          <div class="text">
+            <h6 class="mb-0">Dependencies</h6>
+          </div>
+        </div>
+        <div class="icon text-white bg-purple"><a class="dropdown-item"
+            href="{{url_for('designerShowDependency.showDependency',email=email)}}"></a></i></div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4" style="width:300px">
+      <div class="card-widget h-100">
+        <div class="card-widget-body">
+          <div class="dot me-3 bg-blue"></div>
+          <div class="text">
+            <h6 class="mb-0">Search</h6>
+          </div>
+        </div>
+        <div class="icon text-white bg-blue"><a class="dropdown-item"
+            href="{{url_for('designerSearch.search',email=email)}}"></a></div>
+      </div>
+    </div>
+  </div>
+  <!--above buttons to change webpage-->
+  <div class="col-lg-6 mb-5" style="position:absolute;margin-left:22%;width:75%">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-heading">CTEATE A COURSE</h4>
+      </div>
+      <div class="card-body">
+        <p>Please input all information before you submit & Add CILOs and Assessments first</p>
+        <form class="addCourses" method="post">
+          <div>
+            <a class="btn btn-outline-primary btn-sm"
+              href="{{url_for('addCILO_Assessment.addCILO_Assessment',email=email)}}">add CILOs&Assessments+</a>
+          </div>
+          <br>
+          {{form.csrf_token}}
+          <div class="mb-3">
+            <label class="form-label text-uppercase">Course Name</label>
+            <input class="form-control" name="CourseName" placeholder="Course Name">
+          </div>
+          <div class="mb-3">
+            <label class="form-label text-uppercase">Course Code</label>
+            <input class="form-control" name="CourseCode" placeholder="Course Code">
+          </div>
+          <div class="mb-3">
+            <label class="form-label text-uppercase">Academic year</label>
+            <input class="form-control" name="semester" placeholder="Academic year">
+          </div>
+          <div class="mb-3">
+            <label class="form-label text-uppercase">Programme</label>
+            <input class="form-control" name="programme" placeholder="Programme">
+          </div>
+          <div class="mb-3">
+            <label class="form-label text-uppercase">Type</label>
+            <input class="form-control" name="type" placeholder="Type">
+          </div>
+          <!--<div class="mb-3">   
+                <label class="form-label text-uppercase"> add a CILO</label> 
+                {% if message!="" %}
+                  <div class="alert alert-warning">
+                    <strong>{{message}}</strong> 
+                  </div>
+                {% endif %}
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" name="CILO" placeholder="Add Assessment Methods">
+                  <button class="btn btn-outline-info">{{form.addCILO(class="addCourses")}}</button>
+                 
+                  <table class="table table-hover" id="tablebox">
+                    <tr>
+                    {% for i in CILO_order %}
+                      <th class="">{{i}}</th>
+                    {% endfor %}
+                    </tr>
+
+                    <tr>
+                    {% for j in CILO %}
+                      <td>{{j}}</td>
+                    {% endfor %}
+                    </tr>
+                  </table>
+                </div>
+                <label class="form-label text-uppercase"> add Assessment Methods</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" name="AssessmentMethod" placeholder="Add Assessment Methods">
+                  <button class="btn btn-outline-info">{{form.add(class="addCourses")}}</button>
+                  <table class="table table-hover" id="tablebox">
+                    <tr>
+                      <th class="active">Assessment Methods</th>
+                      <th class="warning">CILO</th>
+                      <th class="warning">Percentage</th>
+                    </tr>
+                    {% for i in assessmentList%}
+                      <tr>
+                          <td>{{i}}</td>
+                          <td>
+                            {% for k in CILO_order%}
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" name="CILO_checkbox:{{i}}" value="{{k}}">
+                              <label class="form-check-label" for="inlineCheckbox1">{{k}}</label>
+                            </div>
+                            {% endfor%}
+                          </td>
+                          <td name="percentage"><input class="form-control"name="percentage"></input></td>
+                      </tr>
+                    {% endfor %}
+                  </table>
+                </div>
+              <div>-->
+
+          </br>
+          <div class="mb-3">
+            <button class="btn btn-danger" name="submit" type="submit">CREATE</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    <style type="text/css">
+      .a-style{
+        text - decoration:none;
+      padding:10px;
+      background:blue;
+      color:#fff;
+    }
+  </style>
+  </script>
+  {% endblock %}
